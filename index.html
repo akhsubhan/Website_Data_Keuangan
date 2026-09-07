@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d0f12">
+  <title>Website Data Keuangan</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="authGate" class="auth-gate">
+    <div class="auth-shapes"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="auth-card">
+      <div class="auth-symbol">＋−</div>
+      <span class="auth-kicker">PERSONAL FINANCE</span>
+      <h1>WEBSITE DATA KEUANGAN</h1>
+      <p class="auth-by">by <strong>akhsubhan</strong></p>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth-view="login">Masuk</button>
+        <button class="auth-tab" data-auth-view="register">Buat Akun</button>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <label class="field"><span>Email</span><input id="loginEmail" type="email" autocomplete="email" placeholder="nama@email.com" required></label>
+        <label class="field"><span>Password</span><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••" required></label>
+        <button class="primary-btn" type="submit">Masuk ke Data Keuangan <b>→</b></button>
+        <button id="forgotPassword" class="text-btn auth-link" type="button">Lupa password?</button>
+      </form>
+      <form id="registerForm" class="auth-form hidden-auth">
+        <label class="field"><span>Email</span><input id="registerEmail" type="email" autocomplete="email" placeholder="nama@email.com" required></label>
+        <label class="field"><span>Password</span><input id="registerPassword" type="password" autocomplete="new-password" minlength="6" placeholder="Minimal 6 karakter" required></label>
+        <label class="field"><span>Ulangi password</span><input id="registerPassword2" type="password" autocomplete="new-password" minlength="6" placeholder="Ketik ulang password" required></label>
+        <button class="primary-btn" type="submit">Buat Akun <b>→</b></button>
+      </form>
+      <p class="auth-message" id="authMessage"></p>
+      <p class="auth-hope">semoga bermanfaat.</p>
+      <p class="auth-note">Akun dibutuhkan agar data keuanganmu dapat tersimpan dan kembali saat login di perangkat lain.</p>
+    </div>
+  </div>
+
+  <div id="splash" class="splash hidden-ui">
+    <div class="splash-bg"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="splash-content"><div class="brand-symbol"><span>＋</span><span>−</span></div><h1>DATA KEUANGAN</h1><p>Catat. Kelola. Kendalikan.</p><div class="loader"><i></i></div></div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <div class="app-shell hidden-ui" id="appShell">
+    <header class="topbar">
+      <div class="brand"><div class="mini-symbol">＋−</div><div><strong>Website Data Keuangan</strong><small id="userEmailLabel">Akun</small></div></div>
+      <div class="top-actions"><button id="themeToggle" class="icon-btn" title="Ganti tema">☾</button><button id="logoutBtn" class="icon-btn logout-btn" title="Keluar">↪</button><button id="menuToggle" class="icon-btn mobile-only" title="Menu">☰</button></div>
+    </header>
+
+    <div class="layout">
+      <aside id="sidebar" class="sidebar">
+        <nav>
+          <button class="nav-item active" data-view="home"><span>⌂</span>Beranda</button>
+          <button class="nav-item" data-view="data"><span>▣</span>Data</button>
+          <button class="nav-item" data-view="analysis"><span>◒</span>Analisis</button>
+          <button class="nav-item" data-view="notes"><span>✎</span>Catatan</button>
+          <button class="nav-item" data-view="needs"><span>☑</span>Kebutuhan Bulanan</button>
+          <button class="nav-item" data-view="settings"><span>⚙</span>Pengaturan</button>
+        </nav>
+        <div class="sidebar-bottom"><small>Data tersimpan di akunmu.</small></div>
+      </aside>
+
+      <main class="main-content">
+        <section id="view-home" class="view active-view">
+          <div class="hero-card"><div class="hero-image"></div><div class="hero-overlay"></div><div class="hero-content"><span class="eyebrow">SALDO SAAT INI</span><h2 id="homeBalance">Rp 0</h2><div class="hero-stats"><div><span class="income-dot"></span><small>Pemasukan</small><strong id="homeIncome">Rp 0</strong></div><div><span class="expense-dot"></span><small>Pengeluaran</small><strong id="homeExpense">Rp 0</strong></div></div></div></div>
+          <div class="section-heading"><div><span class="eyebrow">CATAT HARI INI</span><h2>Tambah transaksi</h2></div><span class="shortcut">ENTER untuk simpan</span></div>
+          <form id="transactionForm" class="transaction-form">
+            <div class="type-switch"><button type="button" class="type-btn income selected" data-type="income">＋ Pemasukan</button><button type="button" class="type-btn expense" data-type="expense">− Pengeluaran</button></div>
+            <div class="form-grid">
+              <label class="field full"><span>Nominal</span><div class="input-prefix"><b>Rp</b><input id="amount" type="number" min="1" step="1" placeholder="0" required></div></label>
+              <label class="field full"><span>Untuk apa?</span><input id="description" type="text" maxlength="80" placeholder="Contoh: Makan malam" required></label>
+              <label class="field"><span>Kategori</span><select id="category"></select></label>
+              <label class="field"><span>Tanggal</span><input id="date" type="date" required></label>
+              <label class="field"><span>Metode</span><select id="method"><option>Cash</option><option>Bank</option><option>E-wallet</option><option>Kartu</option><option>Lainnya</option></select></label>
+              <label class="field"><span>Catatan singkat <em>opsional</em></span><input id="transactionNote" type="text" maxlength="120" placeholder="Tambahan informasi"></label>
+            </div>
+            <button class="primary-btn" type="submit"><span>Simpan Transaksi</span><b>↵</b></button>
+          </form>
+          <button id="showDataBtn" class="outline-btn wide">◉ &nbsp; Lihat Data Sebelumnya <span>→</span></button>
+          <div class="note-box"><div class="note-title"><span>✎</span><div><span class="eyebrow">JURNAL</span><h3>Catatan keuangan hari ini</h3></div></div><textarea id="quickNote" maxlength="600" placeholder="Tulis kritik, evaluasi, atau saran untuk keuanganmu hari ini..."></textarea><div class="note-footer"><small>Catatan ikut tersimpan ke akunmu.</small><button id="saveQuickNote" class="text-btn">Simpan catatan →</button></div></div>
+          <footer class="footer"><div class="footer-brand"><div class="brand-mark">＋−</div><h2>WEBSITE DATA KEUANGAN</h2><p>Semoga bermanfaat dan membantu mengelola keuangan dengan lebih sadar.</p></div><div class="support-copy"><b>Ada kendala atau butuh bantuan?</b><span>Hubungi pengelola resmi Website Data Keuangan melalui kontak berikut.</span></div><div class="contact-grid"><a href="https://instagram.com/akh_rukyan" target="_blank" rel="noopener"><span>DM Instagram</span><b>@akh_rukyan</b></a><a href="https://youtube.com/@akhsubhan" target="_blank" rel="noopener"><span>YouTube</span><b>@akhsubhan</b></a><a href="mailto:akhsubhan02@gmail.com"><span>Email</span><b>akhsubhan02@gmail.com</b></a></div><div class="footer-bottom">© 2026 Website Data Keuangan <span>•</span> dibuat untuk berbagi manfaat</div></footer>
+        </section>
+
+        <section id="view-data" class="view"><div class="page-heading"><div><span class="eyebrow">RIWAYAT</span><h1>Data Keuangan</h1><p>Transaksi tersimpan di akunmu.</p></div><button id="exportBtn" class="outline-btn">↓ Export CSV</button></div><div class="summary-grid"><div class="summary-card"><span>Saldo</span><strong id="dataBalance">Rp 0</strong></div><div class="summary-card positive"><span>Total Pemasukan</span><strong id="dataIncome">Rp 0</strong></div><div class="summary-card negative"><span>Total Pengeluaran</span><strong id="dataExpense">Rp 0</strong></div></div><div class="data-toolbar"><div class="filter-tabs"><button class="filter-btn active" data-filter="all">Semua</button><button class="filter-btn" data-filter="income">Pemasukan</button><button class="filter-btn" data-filter="expense">Pengeluaran</button></div><input id="searchInput" class="search-input" type="search" placeholder="Cari transaksi..."></div><div id="transactionList" class="transaction-list"></div></section>
+
+        <section id="view-analysis" class="view"><div class="page-heading"><div><span class="eyebrow">INSIGHT</span><h1>Analisis</h1><p>Lihat pola keuanganmu secara sederhana.</p></div></div><div class="analysis-grid"><div class="panel chart-panel"><div class="panel-heading"><div><span class="eyebrow">PERBANDINGAN</span><h2>Pemasukan vs Pengeluaran</h2></div></div><div class="bar-chart"><div class="bar-group"><div class="bar income-bar" id="incomeBar"></div><span>Pemasukan</span></div><div class="bar-group"><div class="bar expense-bar" id="expenseBar"></div><span>Pengeluaran</span></div></div><div class="chart-values"><b id="analysisIncome">Rp 0</b><b id="analysisExpense">Rp 0</b></div></div><div class="panel"><div class="panel-heading"><div><span class="eyebrow">KATEGORI</span><h2>Pengeluaran</h2></div></div><div id="categoryBreakdown" class="category-breakdown"></div></div></div><div class="panel insight-panel"><span class="eyebrow">RINGKASAN</span><h2 id="analysisMessage">Belum ada transaksi.</h2><p id="analysisSubmessage">Mulai catat pemasukan dan pengeluaran untuk mendapatkan insight.</p></div></section>
+
+        <section id="view-notes" class="view">
+          <div class="page-heading"><div><span class="eyebrow">CATATAN PRIBADI</span><h1>Catatan</h1><p>Tulis evaluasi, pelajaran, rencana, atau hal penting tentang keuanganmu. Semua catatan tersimpan di akun ini.</p></div></div>
+          <div class="note-editor panel"><div class="panel-heading"><div><span class="eyebrow">TULIS CATATAN</span><h2>Catatan baru</h2></div></div><label class="field"><span>Isi catatan</span><textarea id="noteInput" maxlength="2000" placeholder="Contoh: Bulan ini pengeluaran makan terlalu besar. Bulan depan harus lebih disiplin..."></textarea></label><div class="note-editor-footer"><small>Catatan tidak memengaruhi saldo atau transaksi.</small><button id="addNoteBtn" class="primary-btn">Simpan Catatan <b>→</b></button></div></div>
+          <div class="section-heading"><div><span class="eyebrow">ARSIP CATATAN</span><h2>Catatan tersimpan</h2></div><span id="notesCount" class="shortcut">0 catatan</span></div>
+          <div id="notesList" class="notes-list"></div>
+        </section>
+
+        <section id="view-needs" class="view">
+          <div class="page-heading"><div><span class="eyebrow">PENGINGAT</span><h1>Kebutuhan Bulanan</h1><p>Buat daftar kebutuhan inti dan tandai yang sudah selesai setiap bulan.</p></div></div>
+          <div class="monthly-panel panel">
+            <div class="monthly-head"><div><span class="eyebrow">BULAN</span><h2 id="needMonthLabel">September 2026</h2><p id="needProgress">0 dari 0 kebutuhan selesai</p></div><div class="month-nav"><button id="prevMonth" class="outline-btn">←</button><button id="todayMonth" class="outline-btn">Bulan ini</button><button id="nextMonth" class="outline-btn">→</button></div></div>
+            <div class="need-add"><input id="needInput" type="text" maxlength="80" placeholder="Contoh: Beli beras, air galon, listrik..."><button id="addNeedBtn" class="primary-small">＋ Tambah</button></div>
+            <div id="needsList" class="needs-list"></div>
+          </div>
+        </section>
+
+        <section id="view-settings" class="view"><div class="page-heading"><div><span class="eyebrow">PREFERENSI</span><h1>Pengaturan</h1><p>Atur tampilan, kategori, dan akunmu.</p></div></div><div class="account-card panel"><div><span class="eyebrow">AKUN AKTIF</span><h2 id="settingsUserEmail">-</h2><p>Data akan tersimpan berdasarkan akun ini.</p></div><button id="settingsLogout" class="danger-btn">Keluar</button></div><div class="settings-list"><div class="setting-row"><div><b>Tema tampilan</b><small>Ganti antara mode gelap dan terang.</small></div><button id="settingsTheme" class="outline-btn">Ganti Tema</button></div><div class="setting-row"><div><b>Nama aplikasi</b><small>Nama yang tampil di bagian atas.</small></div><div class="setting-inline"><input id="appNameInput" class="settings-input" maxlength="32" placeholder="Website Data Keuangan"><button id="saveAppName" class="outline-btn">Simpan</button></div></div><div class="settings-section personal-contact-section"><div class="section-mini-heading"><div><span class="eyebrow">DATA PRIBADI</span><h2>Kontak Pribadi</h2><p>Kolom kontak dibuat tetap. Kamu bisa mengisi atau mengedit isinya, tetapi tidak bisa menambah kolom baru.</p></div></div><div id="personalContactPreview" class="personal-contact-preview"></div><details class="contact-edit"><summary>✎ Edit kontak pribadi</summary><div class="personal-contact-grid"><label class="field"><span>Nama</span><input id="personalNameInput" class="settings-input" maxlength="80" placeholder="Nama kamu"></label><label class="field"><span>No. HP</span><input id="personalPhoneInput" class="settings-input" maxlength="30" placeholder="08xxxxxxxxxx"></label><label class="field"><span>WhatsApp</span><input id="personalWhatsappInput" class="settings-input" maxlength="30" placeholder="08xxxxxxxxxx"></label><label class="field"><span>Email pribadi</span><input id="personalEmailInput" class="settings-input" type="email" maxlength="100" placeholder="nama@email.com"></label><label class="field full"><span>Instagram pribadi</span><input id="personalInstagramInput" class="settings-input" maxlength="80" placeholder="@username"></label></div><div class="contact-save-row"><button id="savePersonalContact" class="primary-small">Simpan Perubahan</button></div></details></div><div class="setting-row"><div><b>Background dashboard</b><small>Ganti foto uang dengan gambar dari perangkatmu.</small></div><div class="setting-inline"><label class="file-btn">Pilih Foto<input id="bgImageInput" type="file" accept="image/*"></label><button id="resetBgBtn" class="outline-btn">Reset</button></div></div><div class="setting-row"><div><b>Backup data</b><small>Export atau import salinan lokal. Data utama tetap tersimpan di cloud.</small></div><div class="setting-inline"><button id="exportJsonBtn" class="outline-btn">Export JSON</button><label class="file-btn">Import JSON<input id="importJsonInput" type="file" accept="application/json,.json"></label></div></div></div><div class="settings-section"><div class="section-mini-heading"><div><span class="eyebrow">KUSTOMISASI</span><h2>Kelola Kategori</h2><p>Tambah, ubah, atau hapus kategori.</p></div><button id="addCategoryBtn" class="primary-small">＋ Tambah Kategori</button></div><div id="categoryManager" class="category-manager"></div></div><div class="settings-list danger-settings"><div class="setting-row danger-row"><div><b>Hapus semua transaksi</b><small>Tindakan ini akan tersimpan ke akunmu dan tidak dapat dibatalkan.</small></div><button id="clearDataBtn" class="danger-btn">Hapus Semua</button></div></div></section>
+      </main>
+    </div>
+  </div>
+  <div id="categoryModal" class="modal hidden"><div class="modal-card settings-modal"><button id="closeCategoryModal" class="modal-close">×</button><span class="eyebrow">KATEGORI</span><h2 id="categoryModalTitle">Tambah kategori</h2><div class="modal-form"><label class="field"><span>Nama kategori</span><input id="categoryNameInput" maxlength="30" placeholder="Investasi"></label><label class="field"><span>Ikon</span><input id="categoryIconInput" maxlength="4" placeholder="📈"></label><label class="field"><span>Jenis transaksi</span><select id="categoryTypeInput"><option value="both">Pemasukan & Pengeluaran</option><option value="income">Pemasukan saja</option><option value="expense">Pengeluaran saja</option></select></label></div><div class="modal-actions"><button id="cancelCategory" class="outline-btn">Batal</button><button id="saveCategory" class="primary-small">Simpan</button></div></div></div>
+  <div id="modal" class="modal hidden"><div class="modal-card"><button id="closeModal" class="modal-close">×</button><span class="eyebrow">KONFIRMASI</span><h2 id="modalTitle">Hapus transaksi?</h2><p id="modalText">Data yang dihapus tidak dapat dikembalikan.</p><div class="modal-actions"><button id="cancelModal" class="outline-btn">Batal</button><button id="confirmModal" class="danger-btn">Hapus</button></div></div></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
